@@ -2,10 +2,8 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 import io from 'socket.io-client';
-import Home from './Home';
-import Room from './Room';
-import Login from './Login';
-import Register from './Register';
+import Home from './Route/Home';
+import Room from './Route/Room';
 
 const socket = io.connect('http://localhost:4000');
 
@@ -28,14 +26,6 @@ function App() {
                 socket={socket}
               />
             }
-          />
-          <Route
-            path='/register'
-            element={<Register socket={socket} />}
-          />
-          <Route
-            path='/login'
-            element={<Login socket={socket} />}
           />
           <Route
             path='/room'

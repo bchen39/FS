@@ -6,8 +6,7 @@ const app = express();
 const http = require('http');
 const cors = require('cors');
 const { Server } = require('socket.io');
-const { loginHandler, regHandler } = require('./handleRoutes')
-const { getFinalList } = require('./utils')
+const { getFinalList, logRegHandler } = require('./utils');
 
 //const mongo_url = "mongodb+srv://yubangchen:ReaeRD0NmdtS1YsX@cluster0.uujg6cv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 const mongo_url = process.env.MONGO_URL
@@ -31,9 +30,7 @@ const io = new Server(server, {
     },
   });
 
-app.post('/register', regHandler);
-
-app.post('/login', loginHandler);
+app.post('/logreg', logRegHandler);
 
 const DEBUG = false;
 var userList = [];
@@ -134,7 +131,7 @@ io.on('connection', (socket) => {
             console.log(doc.vote);
         }
 
-        // Update vote number for the message above.
+        // Update vote number for the message above in the Messages database.
         var new_votes = 0;
         var count = await Votes.where( {msg_timestamp: msg_timestamp, room: room, vote: true}).countDocuments();
         new_votes += count;

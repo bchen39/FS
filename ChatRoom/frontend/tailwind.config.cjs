@@ -1,6 +1,7 @@
 module.exports = {
     content: [
-        "./src/*.jsx"
+        "./src/*.jsx",
+        "./src/Route/*.jsx"
     ],
     theme: {
         extend: {}
