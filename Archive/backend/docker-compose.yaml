@@ -1,0 +1,25 @@
+services:
+  backend-app:
+    build: .
+    image: backend-app
+    environment:
+      - MONGO_URL=mongodb://mongodb:27017/node-boilerplate
+    ports:
+      - '4000:4000'
+    depends_on:
+      - mongodb
+    networks:
+      - node-network
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - /data/db
+    networks:
+      - node-network
+networks:
+  node-network:
+    driver: bridge
+    
